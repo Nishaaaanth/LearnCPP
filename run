@@ -1,0 +1,13 @@
+#! /bin/bash
+
+echo "Compiling..."
+args="-Wall -Waddress -Wextra"
+name="learn"
+if [ ! -d "./build" ]; then
+	mkdir "./build"
+fi
+clang++ $args "$name.cpp" -o "./build/$name"
+
+echo
+echo "Building..."
+"./build/$name"
