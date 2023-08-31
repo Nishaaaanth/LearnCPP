@@ -2,11 +2,12 @@
 
 echo "Compiling..."
 args="-Wall -Waddress -Wextra"
+version="-std=c++20"
 name="learn"
 if [ ! -d "./build" ]; then
 	mkdir "./build"
 fi
-clang++ $args "$name.cpp" -o "./build/$name"
+clang++ $args "$version" "$name.cpp" -o "./build/$name"
 
 echo
 echo "Building..."
