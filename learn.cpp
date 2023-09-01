@@ -235,7 +235,22 @@ int main(void) {
 		std::cout<<(34)<<std::endl;
 		std::cout<<std::noshowpos;
 		std::cout<<(34)<<std::endl;
+		
+		12. dec, hex, oct  => to convert a number an integer (will not convert a floating point number)
+		std::cout<<std::dec<<55<<std::endl;
+		std::cout<<std::hex<<55<<std::endl;
+		std::cout<<std::oct<<55<<std::endl;
+
+		13. showbase  => to represent base of the number (0x, 0, 0b)
+		14. noshowbase  => to print number without the base
+
+		15. uppercase  => to print the scientific & hexadecimal numbers with uppercase alphabets
+		std::cout<<std::uppercase;
+		std::cout<<std::hex<<717171<<'\n'<<3e10<<'\n';
 	*/
+
+	std::cout<<std::uppercase;
+	std::cout<<std::hex<<717171<<'\n';
 
 	return 0;
 }
