@@ -6,8 +6,8 @@ using namespace std;
 int main(void) {
 	/* NUMBER SYSTEMS
 		int a {070};   => Octal
-		int a {0xa};   => Hexa
-		int a {0b011}; => Binary
+		int b {0xa};   => Hexa
+		int c {0b011}; => Binary
 	*/
 
 	/* VARIABLE INITIALIZATION
@@ -247,10 +247,20 @@ int main(void) {
 		15. uppercase  => to print the scientific & hexadecimal numbers with uppercase alphabets
 		std::cout<<std::uppercase;
 		std::cout<<std::hex<<717171<<'\n'<<3e10<<'\n';
+
+		17. fixed  => will display every numbers with consistant format
+		double a{3.1415926535}  => 3.141593
+		double b{1.34e-10}  => 0.000000 (this is because the value is too small for the precision of the data type to display)
+		double c{200.0}  => 200.000000
+
+		18. scientific  => everything will be displayed in scientific notation
+		double a{3.1415926535}  => 3.141593E+00
+		double b{1.34e-10}  => 1.340000E-10
+		double c{200.0}  => 2.000000E+02
+
+		But by default all the values are displayed in the following format
+		double a{3.1415926535}  => 3.14159
+		double b{1.34e-10}  => 1.34E-10
+		double c{200.0}  => 200
 	*/
-
-	std::cout<<std::uppercase;
-	std::cout<<std::hex<<717171<<'\n';
-
-	return 0;
 }
