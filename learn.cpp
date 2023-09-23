@@ -1,6 +1,8 @@
+#include <ios>
 #include <iostream>
 #include <iomanip>
 #include <compare>
+#include <limits>
 using namespace std;
 
 int main(void) {
@@ -71,7 +73,7 @@ int main(void) {
 		double a {2.11111111111111111};        => size(8),  precision(15)       => recommended (default)
 		double long a {2.111111111111111111L}  => size(16), precision(>double)
 
-		precision by default would be 7
+		precision by default would be 7 for float and double of that for double and a little more than that for long double (precision of long double will not go below than that of double)
 		To set precision => setprecision();
 
 		// SCIENTIFIC NUMBER (1e10)
@@ -193,6 +195,8 @@ int main(void) {
 		2. flush => causes immediate sending of data to the device connected to the stream. So, what happens with 'cout' is that the data goes to a intermediary buffer(like a storage) before printing in the console. It'll first print out each word and line one by one to that buffer and then directly transfer all of the data to the console at once.
 		std::cout<<std::flush;
 		std::cout<<"Hello there\nHow's it going there?"<<endl;
+		
+		std::cout<<"Hello there"<<std::endl<<std::flush;
 
 		3. setw() => to set the width of the value to be printed.
 		std::cout << std::setw(10) << "Firstname" <<std::setw(10)<<"Lastname"<< std::setw(5) <<"Age"<<std::endl;
@@ -258,9 +262,58 @@ int main(void) {
 		double b{1.34e-10}  => 1.340000E-10
 		double c{200.0}  => 2.000000E+02
 
-		But by default all the values are displayed in the following format
+		But by default all the values are displayed in the following format i.e, applying scientific format wherever applicable
 		double a{3.1415926535}  => 3.14159
 		double b{1.34e-10}  => 1.34E-10
 		double c{200.0}  => 200
+
+		To change the double value back to default format from scientific or fixed.
+		std::cout.unsetf(std::ios::scientific | std::ios::fixed)
+
+		19. showpoint  => for showing trailing '0' if neccessary (like for floating point number it's neccessary and for int it's not)
+
+		20. noshowpoint  => for not showing trailing '0' which is set by 'default'
+	*/
+
+	/* LIMITS LIBRARY
+		#include <limits>
+
+		1. std::numeric_limits<T>::min()  => will provide the min possible number for the provided data type(T)
+		2. std::numeric_limits<T>::max()  => will provide the max possible number for the provided data type(T)
+		3. std::numeric_limits<T>::lowest()  => will provide the lowest possible number for the provided data type(T) and can be compared with min for correctness.
+		4. std::numeric_limits<T>::digits()  => will provide the number of digits possible for the given data type(T)
+		5. std::numeric_limits<T>::is_signed()  => will tell if the number is signed or unsigned
+	*/
+
+	/* MATH FUNCTIONS
+		#include <cmath>
+
+		1. std::floor(value)  => will round down
+		2. std::ceil(value)  => will round up
+		3. std::abs(value)  => will provide the absolute value
+		4. std::exp(value)  => will provide the exponential of the value (e^value) [e => 2.71828]
+		5. std::pow(value, exponent)  => will raise the value to the power of the exponent provided 
+		(logs are reverse of power)
+		6. std::log(value)  => will give the log of the value to the base 'e'
+		7. std::log10(value)  => will give the log of the value to the base '10'
+		8. std::sqrt(value)  => will provide the square root of the provided value.
+		9. std::round(value)  => will provide the square root of the provided value.
+		if 2.5 & above => rounded up to 3
+		else if 2.4 & below => rounded up to 2
+		10. std::sin(value)  => will provide sin of a value
+		11. std::cos(value)  => will provide cos of a value
+		12. std::tan(value)  => will provide tan of a value
+	*/
+
+	/* WIERD INTEGRAL TYPES
+		char | short (basically integral types with size less than 4 bytes)
+		If we have values with these types and have arithmetic operators it'll convert the types to 'int' because int is the smallest integral data types for which arithmetic operation works
+
+		short a{1};
+		short b{20};
+		cout<<sizeof(a)<<" "<<sizeof(b)<<"\n";
+
+		auto result = a + b;
+		std::cout<<sizeof(result)<<"\n";  => will print out the size of an int instead of short(2 bytes). Same goes with char arithmetic operation on which will also return int.
 	*/
 }
