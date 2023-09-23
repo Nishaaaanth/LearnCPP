@@ -315,5 +315,7 @@ int main(void) {
 
 		auto result = a + b;
 		std::cout<<sizeof(result)<<"\n";  => will print out the size of an int instead of short(2 bytes). Same goes with char arithmetic operation on which will also return int.
+
+		This is basically compiler doing implicit conversion
 	*/
 }
