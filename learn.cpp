@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <compare>
 #include <limits>
+#include <cmath>
 using namespace std;
 
 int main(void) {
@@ -371,5 +372,117 @@ int main(void) {
 		}
 
 		string result = a > b ? "a is greateer" : "b is greater";
+	*/
+
+	/*  LOOP
+		1. FOR LOOP
+		for(unsigned int i{}; i<10; ++i) {
+			//statements
+		}
+
+		size_t  => is a type alias for some unsigned int representation (size depends on the compiler [In my compiler it's 8bytes])
+
+		for(size_t i{0}; i<10; ++i) {
+			//statements
+		}
+
+		if we want to use iterator variable outside the loop as well:
+		size_t i{};
+		for(i; i<10; ++i) {
+			//statements
+		}
+		++i;
+
+		or
+
+		size_t i{};
+		for( ; i<10; ++i) {
+			//statements
+		}
+		++i;
+
+		GOOD PRACTICE:
+		It is to use a const variable for the counter because there might be a chance that we'll be re-using that variable in other loops as well
+		const size_t COUNT{10};
+		size_t i{};
+		for( ; i<COUNT; ++i) {
+			//statements
+		}
+		++i
+
+		RANGE BASED FOR LOOP:
+		int arr[] {1, 2, 3};
+		for(auto value : arr) {
+			//statements
+		}
+
+		2. WHILE LOOP
+		const size_t COUNT{10};
+		size_t i{};
+		
+		while(i<COUNT) {
+			//statements
+			++i;
+		}
+		++i;
+
+		3. DO WHILE LOOP
+		const size_t COUNT{10};
+		size_t i{11};
+
+		do {
+			//statements
+			++i;
+		} while (i<COUNT);
+	*/
+
+	/*  ARRAYS
+		Array are a way to store homogenous types of data together in a contigious memory location (data type should be the same because I guess it'll feel confused when it sees one of the value having different size of bits of binaries instead of the number of bits allocated to it)
+		1. INITIALIZE
+		int arr[10];  => once we declare an array will be garbage values inside them. Only once we initialize the value it'll be updated.
+
+		arr[0] = 1;  => updating the 1st index with a value [Always while indexing the array be aware of the boundary of the array especially while working with loops. Sometimes it'll give garbage values or sometimes if your luck is not in your side then the whole OS might fail because you might not know what memory you might be using since it has given access to some contigious memory with the given size it found free which also means that the very next index after the boundary of the array might have garbage not currently used by the OS or it might be using that memory for OS]
+		
+		cout<<arr<<"\n";  => will print the address of the first index of the array
+
+		2. INITIALIZE AND DECLARE
+		double arr[10] {1, 2.4, 5, 9.3, 10, 5, 9, 10, 2, 3};  => this will initailize and declare the array
+
+		double arr[5] {1, 2, 3};  => this will update the value in the 1st 3 indices and for the next available indices it'll update to 0.
+
+		int arr[] {1, 2, 3}  => compiler will deduce the size of the array to the values present in the array
+		we can also make use of RANGE BASED FOR LOOP for arrays
+
+		const int arr[] {1, 2, 3}  => won't be able to update the value of the array with CONST as type
+		arr[0] = 0;  => will throw an error
+
+		3. SIZE
+		std::size(arr)  => will provide the size of the array in runtime (c++ 17)
+		previous hacks for the same was  => size_t count {sizeof(arr)/sizeof(arr[0])};
+
+		4. ARRAY OF CHAR
+		char str[5] {'h', 'e', 'l', 'l', 'o'};
+		for(auto c: str) cout<<c<<" \n";
+
+		str[0] = 'm';
+		for(auto c: str) cout<<c<<" \n";
+
+		with char arrays the string can be directly printed with [IMP] => cout<<str<<"\n";  (but for this to work sometime it might require you to have '\0' or the null terminator string character at the end of the array otherwise in some cases some junk value will be printed at the end) [size also will be printed out properly if we add this]
+		
+		character array ending with '\0' is called 'c string'
+
+		
+		char str[6] {'h', 'e', 'l', 'l', 'o'};
+		cout<<str<<"\n";
+		char str[] {'h', 'e', 'l', 'l', 'o'};
+		cout<<size(str)<<"\n";  => size will be 6 because null terminator string character will be appended at the end of the array
+
+		char str[6] {'h', 'e', 'l', 'l', 'o', '\0'};
+		cout<<str<<"\n";
+		char str[] {'h', 'e', 'l', 'l', 'o', '\0'};
+		cout<<size(str)<<"\n";
+
+		LITERAL C STRING (recommended way to initialize the character array)
+		char str[] {"hello"};  => this will by default add null ternminator string character at the end
 	*/
 }
