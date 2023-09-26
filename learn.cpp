@@ -89,6 +89,10 @@ int main(void) {
 			c/b   => Nan
 	*/
 
+	/*  CONST
+		const  => to make a variable immutable
+	*/
+
 	/* BOOLEAN
 		bool a{true};   => will print 1.
 		bool b{false};  => will print 0.
@@ -317,5 +321,55 @@ int main(void) {
 		std::cout<<sizeof(result)<<"\n";  => will print out the size of an int instead of short(2 bytes). Same goes with char arithmetic operation on which will also return int.
 
 		This is basically compiler doing implicit conversion
+	*/
+
+	/* CONDITIONAL FLOWS
+		if, else if, else  => conditional expression
+		switch  => alternative way of using coniditonal expression
+		ternary  => alternative way of using conditional expression if there are 2 paths (othewise it'll ruin the code quality) [NOTE: both the values should be of the same type]
+
+		switch(condition) {
+			case 1:
+				//do something
+				break;
+			case 2:
+				//do something
+				break;
+			default:
+				//do something
+		}
+		
+		(or)
+
+		switch(condition) {
+			case 1: {
+				//do something
+			}
+			break;
+
+			case 2: {
+				//do something
+			}
+			break;
+
+			default: {
+				//do something
+			}
+		}
+
+		condition  => can be integral types and enums
+
+		switch(condition) {
+			case 1:
+			case 2:
+			case 3:
+			...
+			case n: {
+				//do something
+			}
+			break;
+		}
+
+		string result = a > b ? "a is greateer" : "b is greater";
 	*/
 }
