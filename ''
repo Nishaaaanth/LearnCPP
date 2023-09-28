@@ -495,7 +495,7 @@ int main(void) {
 		But, we can do the following to add double to int pointer:
 		p_number = static_cast<int>(double_value);
 
-		Or else we can explicitly state by using  nullptr. [It's really bad to not use nullptr for initializing the pointer. Otherwise we might use a memory that's in use by other programs it's be storing value in a junk address]
+		Or else we can explicitly state by using  nullptr.
 		int * p_number{nullptr};
 
 		All pointer will have the same size even with different data types this is because at all cases it's storing the address which will have the same size all the time.
@@ -532,46 +532,7 @@ int main(void) {
 		DEREFERENCING CHAR POINTER
 		cout<<*p_str;  => will print the first character
 		cout<<p_str;  => will print the whole string
-
-		MODIFICATION OF CHAR ARRAY THROUGH POINTER
-		(This is throw an error or crash the program because updating the value of the string literal is not possible since it's a const char)
-		const char p_message{"hello"};
-		*p_message = 'B';  => will throw an error since it's read-only
-
-		So, if we want to have a modifiable char array it should be normal char array
-		char message[]{"hello"};
-		message[0] = 'm';
 	*/
-
-	/*  PROGRAM MEMORY MAP
-		If we double click on the exe or program files it'll be stored in RAM(Memory) and will be stored in a special section of memory called 'Program Area'.
-		But, the reality is that all the programs are run in Virtual Memory. Otherwise we would run out of memory. With Virtual memory it's tricking programs into thinking that it's the only program running in the OS and all the memory belongs to it. This memory that program uses is called 'Memory Map'.
-
-		Each memory is abstracted into a process and each process will have access to memory range 0~(2^N)-1. where 'N' is 32 if 32 bit and 64 is the system is 64bit.
-		
-		MEMORY MAPPING UNIT
-		It is mapping the Virtual Memory to the actual memory. It's assign some sections of the memory to each process in the RAM.
-		And it'll use that section only while executing the program.
-
-		Memory map is defined by the OS so we won't be able to execute the same executables in different OS we'll have to build separately [IMP]
-		
-		MEMORY MAP DIVISION
-		System  |  Stack  |	 Heap  |  Data  |  Text
-
-		Stack  => will store our local variables
-		int a, b, c;
-		a = b = c = 7;  => a, b, c will be stored in stack
-		heap  => additional memory we can use to make things better for our program during run time. (dynamic memory)
-		Text  => will hold the actual binary of the program so that the CPU can execute this
-	*/
-
-	/*  DYNAMIC MEMORY ALLOCATION
-		Start using heap from the memory map of our system if memory isn't enough for our execution.
-
-		BAD PRACTICE
-		int *p;  => contains junk address
-		*p = 52; => writing into junk (dereferencing and initializing)
-
-
-	*/
+	const char *p_str{"hello"};
+	cout<<*p_str<<"\n";
 }
