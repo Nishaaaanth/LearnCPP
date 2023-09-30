@@ -471,11 +471,10 @@ int main(void) {
 		
 		character array ending with '\0' is called 'c string'
 
-		
 		char str[6] {'h', 'e', 'l', 'l', 'o'};
 		cout<<str<<"\n";
 		char str[] {'h', 'e', 'l', 'l', 'o'};
-		cout<<size(str)<<"\n";  => size will be 6 because null terminator string character will be appended at the end of the array
+		cout<<size(str)<<"\n";  => size will be 6 because null terminator string character will be appended at the end of the array (not sure how executing I couldn't find this working)
 
 		char str[6] {'h', 'e', 'l', 'l', 'o', '\0'};
 		cout<<str<<"\n";
@@ -572,6 +571,85 @@ int main(void) {
 		int *p;  => contains junk address
 		*p = 52; => writing into junk (dereferencing and initializing)
 
+		Stack  => finite memory
+				  developer isn't in full control of memory lifetime
+				  lifetime is controlled by scope mechanism
 
+		heap  => finite memory but can be made use of when stack memory is not sufficient
+				 developer has full control of when the memory is allocated and when it's released
+				 lifetime is controlled by 'new' and 'delete' operators
+
+		DYNAMIC INITIALIZATION (Dynamically allocating memory at runtime)
+		int *p_number{nullptr};
+		p_number = new int;  => this piece of memory will be allocated to the program at runtime and no other process would be running at this memory location
+
+		*p_number = 8;
+
+		LIFETIME OF HEAP
+		int main() {
+			{
+				int a{8};
+				int *b = new int;
+			}
+			return 0;
+		}
+
+		Here, 'a' will be limited to that scope. But, whereas for 'b' the memory will be for us to use.
+
+		RESETTING/ RELEASING
+		This is returning the heap memory to the OS.
+		int *p_number{nullptr};
+		p_number = new int;
+
+		delete p_number;
+		p_number = nullptr;  => good practice to set the released memory to nullptr
+
+		INITIALIZING NEW UPON POINTER DECLARATION
+		int *p_number{new int};  => memory location contains junk
+		int *p_number{new int(20)};  => using direct initialization
+		int *p_number{new int{20}};  => using uniform initialization
+
+		Avoid deleting the memory location twice [IMP]
+
+		REMEMBER THIS IN POINTERS
+		Don't try to assign value to a memory using dereferencing technique
+		DON'T:
+		int *p_number{nullptr};
+		*p_number = 4;
+
+		DO'S:
+		int *p_number{nullptr};
+		int a{4};
+
+		But we can dereference when we have dynamic memory [IMP]
+		int *p_number{};
+		p_number = new int;
+		*p_number = 8;  => writing into dynamically allocated memory
+
+		We can also reuse the memory we've returned to the OS using delete. This is valid.
+		int *p_number{new int(2)};
+		delete p_number;
+		p_number = nullptr;
+
+		p_number = new int(8);  => valid
 	*/
+
+	/*  DAGLING POINTERS
+		Pointer that is not pointing to the valid memory address. Trying to dereference and use a dangling pointer will result in undefined behavior
+		1. Uninitialized pointer
+		2. Deleted pointer
+		3. Multiple pointers pointing to the same memory
+		int *p_number{new int{2}};
+		int *p_number1{p_number};
+
+		now if we delete p_number then if we try to use p_number1 this will cause an error
+		delete p_number;
+		cout<<*p_number1<<"\n";  => will throw an error or garbage values
+	*/
+
+		int *p_number{new int{2}};
+		int *p_number1{p_number};
+		cout<<*p_number1<<"\n";
+		delete p_number;
+		cout<<*p_number1<<"\n";
 }
