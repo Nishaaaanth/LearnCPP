@@ -642,14 +642,38 @@ int main(void) {
 		int *p_number{new int{2}};
 		int *p_number1{p_number};
 
-		now if we delete p_number then if we try to use p_number1 this will cause an error
+		now if we delete p_number then if we try to use p_number1 this will cause an error or will have junk value
 		delete p_number;
 		cout<<*p_number1<<"\n";  => will throw an error or garbage values
-	*/
 
-		int *p_number{new int{2}};
-		int *p_number1{p_number};
-		cout<<*p_number1<<"\n";
-		delete p_number;
-		cout<<*p_number1<<"\n";
+		SOLUTIONS
+		1. Always initialize the pointers
+		initialize pointers immediately:
+			int *p_number{};
+			int *p_number1{new int(3)};
+
+		check for nullptr before use:
+			if(p_number != nullptr) { //only then use the value }
+
+		2. Reset the pointer to 'nullptr' after deleting
+
+		3. For multiple pointers pointing to the same address create a master pointer (that owns the memory responsible for releasing whenever necessary), other pointers(slave pointers) should only be able to dereference when the master pointer is valid.
+		int *p_number{new int(8)};  => master pointer
+		int *p_number1{p_number};  => slave pointer
+
+		cout<<*p_number;  => dereferencing the pointer and using them
+
+		if(!(p_number == nullptr)) {//only using slave pointers when master pointer is valid
+			cout<<*p_number1;
+		}
+
+		delete p_number;  => master releases the memory
+		p_number = nullptr;
+
+		if(!(p_number == nullptr)) { //only use when master pointer is valid
+			cout<<*p_number1;  => this will not execute this time because master pointer is nullptr now.
+		} else {
+			cout<<"Invalid pointer";
+		}
+	*/
 }
