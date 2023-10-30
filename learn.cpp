@@ -486,6 +486,43 @@ int main(void) {
 
 		LITERAL C STRING (recommended way to initialize the character array)
 		char str[] {"hello"};  => this will by default add null ternminator string character at the end
+
+		5. TEMPLATE ARRAY (REFERENCE TO ARRAY)
+		This method retains all the information about the array. Hence, no need to pass the size of the array
+		template <size_t N> void print(int (&a)[N]) {
+			for(int e : a) cout<<a<<endl;
+		}
+
+		int main() {
+			int a[]{1, 2, 3, 4, 5};
+			print(a);
+
+			return 0;
+		}
+
+		6. PASSING ARRAY AS A VALUE (Only works for non-dynamic arrays [GFG])
+		Use a struct wrapper for the array when we want to pass array as a value to a function
+		struct ArrayWrapper { 
+			int arr[5]; 
+		};
+
+		int main() { 
+			int i; 
+			struct ArrayWrapper obj; 
+			for (i=0; i<SIZE; i++) 
+				obj.arr[i] = 10; 
+		
+			modify(obj); 
+		
+			// Display array contents 
+			printf("\n\nIn 'Main', after calling modify() \n"); 
+			for (i = 0; i < SIZE; ++i) 
+				printf("%d ", obj.arr[i]); // Not changed 
+		
+			printf("\n"); 
+		
+			return 0; 
+		} 
 	*/
 
 	/*  POINTER
