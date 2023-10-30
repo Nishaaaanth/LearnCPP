@@ -460,6 +460,9 @@ int main(void) {
 		std::size(arr)  => will provide the size of the array in runtime (c++ 17)
 		previous hacks for the same was  => size_t count {sizeof(arr)/sizeof(arr[0])};
 
+		To find the length of the array:
+		*(&arr+1)-arr  => here &arr+1 will give the address to the first element of the next array. If, there's no array defined then it'll get arbitrary address to the address right after the end of the given array. Hence, by removing the address of the first element of the array with the arbitrary address after the array gives the length of the element.
+
 		4. ARRAY OF CHAR
 		char str[5] {'h', 'e', 'l', 'l', 'o'};
 		for(auto c: str) cout<<c<<" \n";
