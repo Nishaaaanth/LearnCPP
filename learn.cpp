@@ -636,7 +636,7 @@ int main(void) {
 
 		Here, 'a' will be limited to that scope. But, whereas for 'b' the memory will be for us to use.
 
-		RESETTING/ RELEASING
+		RESETTING/ RELEASING (calling delete on nullptr is fine)
 		This is returning the heap memory to the OS.
 		int *p_number{nullptr};
 		p_number = new int;
@@ -674,7 +674,7 @@ int main(void) {
 		p_number = new int(8);  => valid
 	*/
 
-	/*  DAGLING POINTERS
+	/*  DANGLING POINTERS
 		Pointer that is not pointing to the valid memory address. Trying to dereference and use a dangling pointer will result in undefined behavior
 		1. Uninitialized pointer
 		2. Deleted pointer
@@ -715,5 +715,111 @@ int main(void) {
 		} else {
 			cout<<"Invalid pointer";
 		}
+	*/
+
+	/*  NEW FAILS
+		"new" might fail but in some rare cases	
+		The following can fail new:
+		int *fail{new int[10000000000000000000]};
+
+		for(size_t i{}; i<100000000000; ++i) {
+			int *fail{new int[10000000]};
+		}
+
+		This fail can be checked using:
+		USING NOTHROW
+		std::nothrow  => this can be an alternative to exception handling process with try and catch block. This code says not to throw an exception when the code fails. This code says not to throw an exception when the code fails but is going to return nullptr
+
+		for(size_t i{}; i<100000000000; ++i) {
+			int *fail{new(std::nothrow) int[10000000]};
+
+			if(fail == nullptr) {
+				cout<<"failed\n";
+			} else {
+				cout<<"passed\n";
+			}
+		}
+
+		USING EXCEPTION
+		try {
+			int *fail{new int[100000000000000090000]};
+			cout<<"Passed\n";
+		} catch(std::exception& ex) {
+			cout<<"Error: "<<ex.what()<<'\n';
+		}
+	*/
+
+	/*  VALID POINTERS
+		int *p_number{};  => nullptr
+
+		if(!(p_number == nullptr)) {
+			cout<<"Valid"<<p_number<<'\n';
+		} else {
+			cout<<"Invalid\n";
+		}
+	*/
+
+	/*  MEMORY LEAK
+		int *p_number{new int[89]};  => dynamically allocated memory
+		int number{2};  => statically allocated memory
+
+		p_number = &number;  => pointer is pointing to the statically allocated memory. But, dynamic memory is still in use but the program has lost access to it. Hence, memory leak.
+
+		SECOND WAY:
+		Here, the pointer is local to that scope once the scope ends the pointer will be lost but the dynamic memory will still be in use by the program
+		int main(int argc, char **argv) {
+			{
+				int *p_number{new int{18}};
+			}
+
+			return 0;
+		}
+	*/
+
+	/*  DYNAMIC ARRAYS
+		size_t size{10};
+
+		double *p_number1{new double[size]};
+		int *p_number2{new(std::nothrow) int[size]{}};
+		double *p_number3{new(std::nothrow) double[size]{1, 2, 3, 4, 5}};
+
+		TO ACCESS THE ELEMENT:
+		INDEXING:
+		if(p_number) {
+			for(size_t i{}; i<size; ++i) cout<<p_number1[i]<<'\n';
+		}
+
+		POINTER ARITHMETICS:
+		if(p_number1) {
+			for(size_t i{}; i<size; ++i) cout<<*(p_number1 + i)<<'\n';
+		}
+
+		RELEASING THE MEMORY:
+		delete[] p_number1;
+
+		size() and range based for loop doesn't work with these arrays. These needs properties of arrays to work but with Dynamic arrays they are decayed into pointers
+	*/
+	
+	/*  DECLARING AND USING REFERENCES 
+	 	It's like an alias variable name for the same value
+		int num{5};	
+
+		int &ref_num1{num};
+		int &ref_num2 = num;
+	*/
+
+	/*  DIFFERENCE B/W REFERENCES AND POINTERS
+		1. No Dereference is needed for read/write                                     1. Is needed
+		2. Can't reference to some other value                                         2. Can be changed to point something else
+		3. Must be initialized at declaration                                          3. We can leave the pointer uninitialized it'll contain garbage address
+		
+		If we try to do the pointer logic of pointing to other value it'll just copy the value and change the value of the variable being referenced
+		int num{1};
+		int ref_num{&num};
+		int num2{2};
+
+		ref_num = num2;  => will make ref_num and num1 as "2"
+
+		So, References are like CONST POINTERS
 	*/
 }
