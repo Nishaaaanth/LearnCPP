@@ -820,6 +820,28 @@ int main(void) {
 
 		ref_num = num2;  => will make ref_num and num1 as "2"
 
-		So, References are like CONST POINTERS
+		So, References are like CONST POINTERS because even with that we won't be able to point to a different value
+		int *const p_number{&num};
+		p_number = &other_num;  => Will throw an error
+	*/
+
+	/*  USING CONST WITH REFERENCES
+		With this we won't be able to modify the value like we are used to with regular references	
+		int age{10};
+		int &const ref_age{age};
+
+		ref_age = 31;  => Will throw an error
+		
+		SHOWING THE SAME BEHAVIOUR WITH POITNERS
+		Adding const pointer to const
+		const int *const const_pointer_to_const_age{&age};
+		*const_pointer_to_const_age = 31;  => Will throw an error
+
+		AND THERE's NO SUCH THING AS BELOW
+		const int &const ref_age{age};
+	*/
+
+	/*	CHARACTER MANIPULATION & STRINGS
+		
 	*/
 }
